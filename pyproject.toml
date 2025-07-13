@@ -6,7 +6,7 @@ authors = [
     {name = "Soutrik Chowdhury",email = "soutrik1991@gmail.com"}
 ]
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = ">=3.10"
 dependencies = [
 "lightning>=2.5.0",
 "loguru>=0.7.2",
@@ -50,7 +50,7 @@ build-backend = "poetry.core.masonry.api"
 # Tool configurations
 [tool.black]
 line-length = 88
-target-version = ['py311']
+target-version = ['py310']
 include = '\.pyi?$'
 extend-exclude = '''
 /(
@@ -76,7 +76,7 @@ ensure_newline_before_comments = true
 line_length = 88
 
 [tool.ruff]
-target-version = "py311"
+target-version = "py310"
 line-length = 88
 
 [tool.ruff.lint]
@@ -116,7 +116,7 @@ python_functions = [
 ]
 
 [tool.mypy]
-python_version = "3.11"
+python_version = "3.10"
 warn_return_any = true
 warn_unused_configs = true
 disallow_untyped_defs = true

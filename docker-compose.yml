@@ -1,0 +1,120 @@
+version: '3.8'
+
+services:
+  # Training service
+  train:
+    build:
+      context: .
+      dockerfile: Docker/Dockerfile
+    container_name: dogbreed-train
+    volumes:
+      # Mount data directory (for dataset download and processing)
+      - ./data:/app/data
+      # Mount logs directory (for training logs and tensorboard)
+      - ./logs:/app/logs
+      # Mount checkpoints directory (for model checkpoints)
+      - ./checkpoints:/app/checkpoints
+      # Mount outputs directory (for any additional outputs)
+      - ./outputs:/app/outputs
+      # Mount Kaggle credentials if available
+      - ~/.kaggle:/root/.kaggle:ro
+    working_dir: /app
+    environment:
+      - PYTHONPATH=/app/src
+      - DOCKER_CONTAINER=1
+      - PYTHONUNBUFFERED=1
+    command: >
+      bash -c "
+        echo '🚀 Starting training with optimized CPU settings...' &&
+        cd src &&
+        python train.py --data ../data --logs ../logs --checkpoints ../checkpoints --max_epochs 5 --batch_size 16 --num_workers 0 --accelerator cpu --precision 32
+      "
+    stdin_open: true
+    tty: true
+
+  # Evaluation service
+  eval:
+    build:
+      context: .
+      dockerfile: Docker/Dockerfile
+    container_name: dogbreed-eval
+    depends_on:
+      - train
+    volumes:
+      # Mount data directory (for dataset access)
+      - ./data:/app/data
+      # Mount logs directory (for evaluation logs)
+      - ./logs:/app/logs
+      # Mount checkpoints directory (for model checkpoints)
+      - ./checkpoints:/app/checkpoints
+      # Mount outputs directory (for evaluation outputs)
+      - ./outputs:/app/outputs
+      # Mount Kaggle credentials if available
+      - ~/.kaggle:/root/.kaggle:ro
+    working_dir: /app
+    environment:
+      - PYTHONPATH=/app/src
+      - DOCKER_CONTAINER=1
+      - PYTHONUNBUFFERED=1
+    command: >
+      bash -c "
+        echo '📊 Starting evaluation with CPU settings...' &&
+        cd src &&
+        python eval.py --data ../data --ckpt_dir ../checkpoints --batch_size 16 --num_workers 0
+      "
+    stdin_open: true
+    tty: true
+
+  # Inference service
+  infer:
+    build:
+      context: .
+      dockerfile: Docker/Dockerfile
+    container_name: dogbreed-infer
+    depends_on:
+      - train
+    volumes:
+      # Mount data directory (for test images)
+      - ./data:/app/data
+      # Mount logs directory (for inference logs)
+      - ./logs:/app/logs
+      # Mount checkpoints directory (for model checkpoints)
+      - ./checkpoints:/app/checkpoints
+      # Mount outputs directory (for prediction outputs)
+      - ./outputs:/app/outputs
+      # Mount Kaggle credentials if available
+      - ~/.kaggle:/root/.kaggle:ro
+    working_dir: /app
+    environment:
+      - PYTHONPATH=/app/src
+      - DOCKER_CONTAINER=1
+      - PYTHONUNBUFFERED=1
+    command: >
+      bash -c "
+        echo '🔮 Starting inference with CPU settings...' &&
+        cd src &&
+        python infer.py --input_folder ../data/test_images --output_folder ../outputs/predictions --ckpt_dir ../checkpoints --num_images 5
+      "
+    stdin_open: true
+    tty: true
+
+  # Interactive service for debugging
+  interactive:
+    build:
+      context: .
+      dockerfile: Docker/Dockerfile
+    container_name: dogbreed-interactive
+    volumes:
+      - ./data:/app/data
+      - ./logs:/app/logs
+      - ./checkpoints:/app/checkpoints
+      - ./outputs:/app/outputs
+      - ~/.kaggle:/root/.kaggle:ro
+    working_dir: /app
+    environment:
+      - PYTHONPATH=/app/src
+      - DOCKER_CONTAINER=1
+      - PYTHONUNBUFFERED=1
+    command: /bin/bash
+    stdin_open: true
+    tty: true 

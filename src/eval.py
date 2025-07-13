@@ -88,7 +88,25 @@ def find_best_checkpoint(ckpt_dir):
 
     if epoch_ckpts:
         # Sort by validation loss (lower is better)
-        epoch_ckpts.sort(key=lambda x: float(x.stem.split("val_loss=")[1]))
+        # Handle the duplicate val_loss= pattern in filenames
+        def extract_val_loss(ckpt_path):
+            try:
+                # Handle both formats: val_loss=0.96 and val_loss=val_loss=0.96
+                stem = ckpt_path.stem
+                if "val_loss=" in stem:
+                    # Split by val_loss= and take the last part
+                    val_loss_parts = stem.split("val_loss=")
+                    if len(val_loss_parts) >= 2:
+                        # Take the last part and extract the number
+                        val_loss_str = val_loss_parts[-1]
+                        # Remove any .ckpt extension if present
+                        val_loss_str = val_loss_str.replace(".ckpt", "")
+                        return float(val_loss_str)
+                return float("inf")  # Return high value if parsing fails
+            except (ValueError, IndexError):
+                return float("inf")  # Return high value if parsing fails
+
+        epoch_ckpts.sort(key=extract_val_loss)
         best_ckpt = epoch_ckpts[0]
         print(f"Found best checkpoint: {best_ckpt}")
         return str(best_ckpt)

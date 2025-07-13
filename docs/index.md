@@ -13,6 +13,7 @@ This project is part of the EMLO (Extensive Machine Learning Operations) course 
 - 🚀 **Hardware Acceleration**: Support for CUDA, MPS (Apple Silicon), and CPU
 - 📊 **Comprehensive Metrics**: Tracking of accuracy, precision, recall, and F1 score
 - 📁 **Kaggle Integration**: Automatic dataset download and preparation
+- 🐳 **Docker Support**: Containerized training, evaluation, and inference
 - 🧪 **Testing**: Comprehensive test suite with pytest
 - 📝 **Documentation**: Auto-generated documentation with MkDocs
 - 🎨 **Code Quality**: Black, Ruff, and isort for code formatting and linting
@@ -38,11 +39,21 @@ This project is part of the EMLO (Extensive Machine Learning Operations) course 
    poetry run python src/infer.py --input_folder data/test_images
    ```
 
+### Docker Quick Start
+
+Alternatively, use Docker to run the entire pipeline:
+
+```bash
+# Build and run with Docker
+./run.sh all
+```
+
 ## Documentation Sections
 
 - [**Getting Started**](getting-started.md): Basic overview and quick start guide
 - [**Setup Guide**](setup.md): Detailed setup instructions
 - [**Kaggle Guide**](kaggle_guide.md): How to use Kaggle datasets
+- [**Docker Guide**](docker.md): Containerized deployment with Docker
 - [**Code Documentation**](codes/index.md): Detailed documentation of all code components
 
 ## Project Structure

@@ -36,6 +36,7 @@ nav:
   - Guides:
     - Setup: setup.md
     - Kaggle Datasets: kaggle_guide.md
+    - Docker Deployment: docker.md
   - Code Documentation:
     - Overview: codes/index.md
     - Core Scripts:

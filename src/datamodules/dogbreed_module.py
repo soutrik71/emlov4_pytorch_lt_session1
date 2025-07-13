@@ -109,7 +109,9 @@ class DogBreedImageDataModule(L.LightningDataModule):
             batch_size=self._batch_size,
             num_workers=self._num_workers,
             shuffle=True,
-            persistent_workers=True if self._num_workers > 0 else False,
+            # Disable persistent workers to avoid shared memory issues in Docker
+            persistent_workers=False,
+            pin_memory=True if self._num_workers > 0 else False,
         )
 
     def val_dataloader(self):
@@ -118,7 +120,9 @@ class DogBreedImageDataModule(L.LightningDataModule):
             batch_size=self._batch_size,
             num_workers=self._num_workers,
             shuffle=False,
-            persistent_workers=True if self._num_workers > 0 else False,
+            # Disable persistent workers to avoid shared memory issues in Docker
+            persistent_workers=False,
+            pin_memory=True if self._num_workers > 0 else False,
         )
 
     def test_dataloader(self):
@@ -127,7 +131,9 @@ class DogBreedImageDataModule(L.LightningDataModule):
             batch_size=self._batch_size,
             num_workers=self._num_workers,
             shuffle=False,
-            persistent_workers=True if self._num_workers > 0 else False,
+            # Disable persistent workers to avoid shared memory issues in Docker
+            persistent_workers=False,
+            pin_memory=True if self._num_workers > 0 else False,
         )
 
     def predict_dataloader(self):
@@ -136,7 +142,9 @@ class DogBreedImageDataModule(L.LightningDataModule):
             batch_size=self._batch_size,
             num_workers=self._num_workers,
             shuffle=False,
-            persistent_workers=True if self._num_workers > 0 else False,
+            # Disable persistent workers to avoid shared memory issues in Docker
+            persistent_workers=False,
+            pin_memory=True if self._num_workers > 0 else False,
         )
 
     def teardown(self, stage: str):
