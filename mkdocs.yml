@@ -1,0 +1,73 @@
+site_name: EMLO PyTorch Lightning Session 1
+site_description: Documentation for EMLO PyTorch Lightning Session 1 project
+site_author: Soutrik Chowdhury
+site_url: https://soutrikchowdhury.github.io/emlov4_pytorch_lt_session1
+
+repo_name: soutrikchowdhury/emlov4_pytorch_lt_session1
+repo_url: https://github.com/soutrikchowdhury/emlov4_pytorch_lt_session1
+
+theme:
+  name: material
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - search.highlight
+    - search.share
+    - content.code.copy
+
+nav:
+  - Home: index.md
+  - Getting Started: getting-started.md
+  - API Reference: reference/
+  - Notebooks: notebooks/
+
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          options:
+            docstring_style: google
+            show_source: true
+            show_root_heading: true
+  - mkdocs-jupyter:
+      execute: false
+      include_source: true
+  - git-revision-date-localized:
+      enable_creation_date: true
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - attr_list
+  - md_in_html
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/soutrikchowdhury
+    - icon: fontawesome/brands/linkedin
+      link: https://linkedin.com/in/soutrikchowdhury 
