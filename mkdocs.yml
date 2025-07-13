@@ -33,6 +33,9 @@ theme:
 nav:
   - Home: index.md
   - Getting Started: getting-started.md
+  - Guides:
+    - Setup: setup.md
+    - Kaggle Datasets: kaggle_guide.md
   - API Reference: reference/
   - Notebooks: notebooks/
 
