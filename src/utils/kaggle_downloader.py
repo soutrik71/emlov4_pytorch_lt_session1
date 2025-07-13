@@ -4,7 +4,9 @@
 """
 Simple script to download Kaggle datasets.
 This script ensures credentials are properly set up before importing Kaggle.
+Overall what this script does is first ensure that the kaggle.json file is in the correct location and then it downloads the dataset to the data folder.
 """
+
 
 import json
 import os
