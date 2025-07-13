@@ -36,6 +36,20 @@ nav:
   - Guides:
     - Setup: setup.md
     - Kaggle Datasets: kaggle_guide.md
+  - Code Documentation:
+    - Overview: codes/index.md
+    - Core Scripts:
+      - Training: codes/train.md
+      - Evaluation: codes/eval.md
+      - Inference: codes/infer.md
+    - Data Handling:
+      - DataModule: codes/datamodule.md
+      - Dataset Splitter: codes/dataset_split.md
+    - Models:
+      - Dog Breed Classifier: codes/model.md
+    - Utilities:
+      - Kaggle Downloader: codes/kaggle_downloader.md
+      - Logging Utilities: codes/logging_utils.md
   - API Reference: reference/
   - Notebooks: notebooks/
 

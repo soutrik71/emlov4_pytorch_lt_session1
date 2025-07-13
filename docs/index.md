@@ -4,11 +4,15 @@ Welcome to the EMLO PyTorch Lightning Session 1 project documentation!
 
 ## Overview
 
-This project is part of the EMLO (Extensive Machine Learning Operations) course and focuses on PyTorch Lightning fundamentals.
+This project is part of the EMLO (Extensive Machine Learning Operations) course and focuses on PyTorch Lightning fundamentals. It implements a dog breed classification system using modern deep learning practices.
 
 ## Features
 
-- 🔥 **PyTorch Lightning**: Modern deep learning framework
+- 🔥 **PyTorch Lightning**: Modern deep learning framework with structured training loops
+- 🐶 **Dog Breed Classification**: Multi-class image classification with pre-trained models
+- 🚀 **Hardware Acceleration**: Support for CUDA, MPS (Apple Silicon), and CPU
+- 📊 **Comprehensive Metrics**: Tracking of accuracy, precision, recall, and F1 score
+- 📁 **Kaggle Integration**: Automatic dataset download and preparation
 - 🧪 **Testing**: Comprehensive test suite with pytest
 - 📝 **Documentation**: Auto-generated documentation with MkDocs
 - 🎨 **Code Quality**: Black, Ruff, and isort for code formatting and linting
@@ -21,10 +25,41 @@ This project is part of the EMLO (Extensive Machine Learning Operations) course 
    ```bash
    poetry install --no-root --with dev
    ```
-3. Run tests:
+3. Run training:
    ```bash
-   poetry run pytest
+   poetry run python src/train.py
    ```
+4. Run evaluation:
+   ```bash
+   poetry run python src/eval.py
+   ```
+5. Run inference:
+   ```bash
+   poetry run python src/infer.py --input_folder data/test_images
+   ```
+
+## Documentation Sections
+
+- [**Getting Started**](getting-started.md): Basic overview and quick start guide
+- [**Setup Guide**](setup.md): Detailed setup instructions
+- [**Kaggle Guide**](kaggle_guide.md): How to use Kaggle datasets
+- [**Code Documentation**](codes/index.md): Detailed documentation of all code components
+
+## Project Structure
+
+```
+├── src/                    # Source code
+│   ├── train.py            # Training script
+│   ├── eval.py             # Evaluation script
+│   ├── infer.py            # Inference script
+│   ├── datamodules/        # Data handling modules
+│   ├── models/             # Model definitions
+│   └── utils/              # Utility functions
+├── tests/                  # Test files
+├── docs/                   # Documentation
+├── pyproject.toml          # Project configuration
+└── mkdocs.yml              # Documentation configuration
+```
 
 ## Development Tools
 
@@ -36,24 +71,6 @@ This project uses several development tools to maintain code quality:
 - **pytest**: Testing framework
 - **mypy**: Type checking
 - **MkDocs**: Documentation generation
-
-## Project Structure
-
-```
-├── src/                    # Source code
-├── tests/                  # Test files
-├── docs/                   # Documentation
-├── pyproject.toml         # Project configuration
-└── mkdocs.yml             # Documentation configuration
-```
-
-## Contributing
-
-1. Format code: `poetry run black .`
-2. Sort imports: `poetry run isort .`
-3. Lint code: `poetry run ruff check .`
-4. Type check: `poetry run mypy .`
-5. Run tests: `poetry run pytest`
 
 ## License
 
